@@ -1,14 +1,10 @@
 (ns cheffy.core
-  (:require [integrant.core :as ig]
-            [reitit.ring :as ring]
+  (:require [cheffy.router :refer [routes]]
+            [integrant.core :as ig]
             [ring.adapter.jetty :as jetty]))
 
 (defn app [env]
-  (ring/ring-handler
-    (ring/router
-      [["/" {:get (fn [_]
-                    {:status 200
-                     :body "hello world"})}]])))
+  (routes env))
 
 (defmethod ig/init-key :server/jetty
   [_ {:keys [handler port]}]

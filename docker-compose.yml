@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    container_name: cheffy_db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cheffy_db
+    volumes:
+      - ./resources/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./resources/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
