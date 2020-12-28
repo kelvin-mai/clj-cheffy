@@ -1,0 +1,10 @@
+{:source-paths ["src/cljs"]
+ :dependencies []
+ :dev-http {5000 "build/browser"}
+ :nrepl {:port 8777}
+ :builds {:browser {:target :browser
+                    :output-dir "build/browser"
+                    :asset-path "."
+                    :modules {:browser-main {:entries [browser.main]
+                                             :init-fn browser.main/init}}
+                    :build-hooks [(_build_hooks.browser/copy-index)]}}}
