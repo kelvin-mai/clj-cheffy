@@ -6,14 +6,14 @@
 
 (defn list-all-recipes [db]
   (fn [req]
-    (let [uid "auth0|5ef440986e8fbb001355fd9c"
+    (let [uid (-> req :claims :sub)
           recipes (db/find-all-recipes db uid)]
       (r/response recipes))))
 
 (defn create-recipe! [db]
   (fn [req]
     (let [recipe-id (str (UUID/randomUUID))
-          uid "auth0|5ef440986e8fbb001355fd9c"
+          uid (-> req :claims :sub)
           recipe (-> req :parameters :body)]
       (db/insert-recipe! db (assoc recipe :recipe-id recipe-id :uid uid))
       (r/created (str base-url "/recipes/" recipe-id)
@@ -31,9 +31,9 @@
 
 (defn update-recipe!
   [db]
-  (fn [request]
-    (let [recipe-id (-> request :parameters :path :recipe-id)
-          recipe (-> request :parameters :body)
+  (fn [req]
+    (let [recipe-id (-> req :parameters :path :recipe-id)
+          recipe (-> req :parameters :body)
           updated? (db/update-recipe! db (assoc recipe :recipe-id recipe-id))]
       (if updated?
         (r/status 204)
@@ -43,8 +43,8 @@
 
 (defn delete-recipe!
   [db]
-  (fn [request]
-    (let [recipe-id (-> request :parameters :path :recipe-id)
+  (fn [req]
+    (let [recipe-id (-> req :parameters :path :recipe-id)
           deleted? (db/delete-recipe! db {:recipe-id recipe-id})]
       (if deleted?
         (r/status 204)

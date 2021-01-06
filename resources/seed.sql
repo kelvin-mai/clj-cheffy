@@ -1,7 +1,7 @@
 -- account
 truncate table account cascade;
 insert into account ("uid", "name")
-values ('auth0|5ef440986e8fbb001355fd9c', 'Auth0'),
+values ('auth0|5ff5f64408284b006bb5d16b', 'Auth0'),
        ('mike@mailinator.com', 'Mike'),
        ('jade@mailinator.com', 'Jade'),
        ('mark@mailinator.com', 'Mark');
@@ -9,7 +9,7 @@ values ('auth0|5ef440986e8fbb001355fd9c', 'Auth0'),
 -- recipe
 truncate table recipe cascade;
 insert into recipe (recipe_id, "public", prep_time, "name", img, favorite_count, "uid")
-values ('a3dde84c-4a33-45aa-b0f3-4bf9ac997680', false, 45, 'Splitony''s Pizza', 'https://res.cloudinary.com/schae/image/upload/f_auto,h_400,q_80/v1548183465/cheffy/recipe/pizza.jpg', 5, 'auth0|5ef440986e8fbb001355fd9c'),
+values ('a3dde84c-4a33-45aa-b0f3-4bf9ac997680', false, 45, 'Splitony''s Pizza', 'https://res.cloudinary.com/schae/image/upload/f_auto,h_400,q_80/v1548183465/cheffy/recipe/pizza.jpg', 5, 'auth0|5ff5f64408284b006bb5d16b'),
        ('a1995316-80ea-4a98-939d-7c6295e4bb46', true, 5, 'Avocado Salad', 'https://res.cloudinary.com/schae/image/upload/f_auto,h_400,q_80/v1548183354/cheffy/recipe/vegie-salad.jpg', 5, 'jade@mailinator.com');
 
 -- step
@@ -29,9 +29,9 @@ values ('27b1f44c-2852-416d-960e-3ee7d23ee713', 1, 'Flower', 250, 'grams', 'a3dd
 -- conversation
 truncate table conversation cascade;
 insert into conversation (conversation_id, "uid", notifications)
-values ('8d4ab926-d5cc-483d-9af0-19627ed468eb', 'auth0|5ef440986e8fbb001355fd9c', 2),
+values ('8d4ab926-d5cc-483d-9af0-19627ed468eb', 'auth0|5ff5f64408284b006bb5d16b', 2),
        ('8d4ab926-d5cc-483d-9af0-19627ed468eb', 'mark@mailinator.com', 0),
-       ('362d06c7-2702-4273-bcc3-0c04d2753b6f', 'auth0|5ef440986e8fbb001355fd9c', 0),
+       ('362d06c7-2702-4273-bcc3-0c04d2753b6f', 'auth0|5ff5f64408284b006bb5d16b', 0),
        ('362d06c7-2702-4273-bcc3-0c04d2753b6f', 'jade@mailinator.com', 1),
        ('2019887e-ae38-4c21-b7a2-2971d43d74b7', 'jade@mailinator.com', 1),
        ('2019887e-ae38-4c21-b7a2-2971d43d74b7', 'mark@mailinator.com', 0);
@@ -39,10 +39,10 @@ values ('8d4ab926-d5cc-483d-9af0-19627ed468eb', 'auth0|5ef440986e8fbb001355fd9c'
 -- message
 truncate table message cascade;
 insert into message (message_id, message_body, created_at, conversation_id, "uid")
-values ('302a4672-9f92-48d5-8c43-7d07f0c3104f', '1st message', '2019-11-23 14:00:00', '8d4ab926-d5cc-483d-9af0-19627ed468eb', 'auth0|5ef440986e8fbb001355fd9c'),
+values ('302a4672-9f92-48d5-8c43-7d07f0c3104f', '1st message', '2019-11-23 14:00:00', '8d4ab926-d5cc-483d-9af0-19627ed468eb', 'auth0|5ff5f64408284b006bb5d16b'),
        ('c0b708e7-07f1-462b-bf3b-f96518d1195e', '2nd message', '2019-11-25 14:00:00', '8d4ab926-d5cc-483d-9af0-19627ed468eb', 'mark@mailinator.com'),
        ('d2dd907b-18c3-4cf4-b331-1742e641c424', '3rd message', '2019-11-24 14:00:00', '8d4ab926-d5cc-483d-9af0-19627ed468eb', 'mark@mailinator.com'),
-       ('3465c69d-8d49-4ec6-af79-31162038240d', '1st message', '2019-11-26 14:00:00', '362d06c7-2702-4273-bcc3-0c04d2753b6f', 'auth0|5ef440986e8fbb001355fd9c'),
+       ('3465c69d-8d49-4ec6-af79-31162038240d', '1st message', '2019-11-26 14:00:00', '362d06c7-2702-4273-bcc3-0c04d2753b6f', 'auth0|5ff5f64408284b006bb5d16b'),
        ('73edeb98-8d7b-4efa-8ba5-9d09baaf6b83', '2nd message', '2019-11-23 14:00:00', '362d06c7-2702-4273-bcc3-0c04d2753b6f', 'jade@mailinator.com'),
        ('754cef74-6b48-4d6a-bf02-9a0d09207468', '2nd message', '2019-11-23 14:00:00', '2019887e-ae38-4c21-b7a2-2971d43d74b7', 'jade@mailinator.com'),
        ('f9d8d63b-ed6a-4be3-93d2-aff370fe1a25', '2nd message', '2019-11-23 14:00:00', '2019887e-ae38-4c21-b7a2-2971d43d74b7', 'mark@mailinator.com');
@@ -50,5 +50,5 @@ values ('302a4672-9f92-48d5-8c43-7d07f0c3104f', '1st message', '2019-11-23 14:00
 -- recipe_favorite
 truncate table recipe_favorite cascade;
 insert into recipe_favorite ("uid", recipe_id)
-values ('auth0|5ef440986e8fbb001355fd9c', 'a3dde84c-4a33-45aa-b0f3-4bf9ac997680'),
+values ('auth0|5ff5f64408284b006bb5d16b', 'a3dde84c-4a33-45aa-b0f3-4bf9ac997680'),
        ('jade@mailinator.com', 'a3dde84c-4a33-45aa-b0f3-4bf9ac997680');

@@ -1,20 +1,36 @@
 {:paths ["src/clj" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.1"}
-        metosin/reitit {:mvn/version "0.5.11"}
-        ring/ring {:mvn/version "1.8.2"}
-        integrant/integrant {:mvn/version "0.8.0"}
-        integrant/repl {:mvn/version "0.3.2"}
-        seancorfield/next.jdbc {:mvn/version "1.1.582"}
-        org.postgresql/postgresql {:mvn/version "42.2.14"}
-        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}
- :aliases {:run {:main-opts ["-m" "cheffy.core" "resources/config.edn"]}
-           :repl {:extra-paths ["dev"]
-                  :extra-deps {nrepl/nrepl {:mvn/version "0.8.0"}
-                               cider/cider-nrepl {:mvn/version "0.25.2"}}
-                  :main-opts ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
-           :repl-cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.10.339"}
-                                    nrepl/nrepl {:mvn/version "0.8.0"}
-                                    cider/cider-nrepl {:mvn/version "0.22.4"}
-                                    cider/piggieback {:mvn/version "0.5.1"}}
-                       :main-opts ["-m" "nrepl.cmdline" "--middleware"
-                                   "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}}}
+ :deps
+   {org.clojure/clojure {:mvn/version "1.10.1"}
+    integrant/repl {:mvn/version "0.3.2"}
+    org.postgresql/postgresql {:mvn/version "42.2.18"}
+    clj-http/clj-http {:mvn/version "3.11.0"}
+    integrant/integrant {:mvn/version "0.8.0"}
+    ovotech/ring-jwt {:mvn/version "2.2.1"}
+    seancorfield/next.jdbc {:mvn/version "1.1.613"}
+    metosin/reitit {:mvn/version "0.5.11"}
+    camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
+    ring/ring {:mvn/version "1.8.2"}}
+ :aliases
+   {:run {:main-opts ["-m" "cheffy.core" "resources/config.edn"]}
+    :repl
+      {:extra-paths ["dev" "test"]
+       :extra-deps
+         {nrepl/nrepl {:mvn/version "0.8.0"}
+          cider/cider-nrepl {:mvn/version "0.25.2"}
+          ring/ring-mock {:mvn/version "0.4.0"}}
+       :main-opts
+         ["-m"
+          "nrepl.cmdline"
+          "--middleware"
+          "[cider.nrepl/cider-middleware]"]}
+    :repl-cljs
+      {:extra-deps
+         {org.clojure/clojurescript {:mvn/version "1.10.339"}
+          nrepl/nrepl {:mvn/version "0.8.0"}
+          cider/cider-nrepl {:mvn/version "0.22.4"}
+          cider/piggieback {:mvn/version "0.5.1"}}
+       :main-opts
+         ["-m"
+          "nrepl.cmdline"
+          "--middleware"
+          "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}}}
