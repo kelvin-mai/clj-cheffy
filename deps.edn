@@ -22,7 +22,8 @@
          ["-m"
           "nrepl.cmdline"
           "--middleware"
-          "[cider.nrepl/cider-middleware]"]}
+          "[cider.nrepl/cider-middleware]"
+          "--interactive"]}
     :repl-cljs
       {:extra-deps
          {org.clojure/clojurescript {:mvn/version "1.10.339"}
@@ -34,3 +35,4 @@
           "nrepl.cmdline"
           "--middleware"
           "[cider.nrepl/cider-middleware,cider.piggieback/wrap-cljs-repl]"]}}}
+

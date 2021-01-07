@@ -3,6 +3,8 @@
             [cheffy.test-system :as ts]
             [clojure.test :refer :all]))
 
+(use-fixtures :once ts/token-fixture)
+
 (def recipe-id (atom nil))
 
 (def recipe
@@ -36,9 +38,7 @@
       (is (= status 204)))))
 
 (comment
-  (def recipe-id "d0582836-33a8-46e3-9786-7924807f66fe")
   (ts/test-endpoint :get "/v1/recipes" {:auth true})
   (ts/test-endpoint :post "/v1/recipes" {:auth true :body recipe})
   (ts/test-endpoint :delete (str "/v1/recipes/" recipe-id) {:auth true})
-  (recipes-test)
-  (recipe-test))
+  (run-tests))
