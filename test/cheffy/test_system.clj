@@ -18,7 +18,8 @@
   ([method uri opts]
    (let [app (-> state/system :cheffy/app)
          request (app (-> (mock/request method uri)
-                          (cond-> (:auth opts) (mock/header :authorization (str "Bearer " @token))
+                          (cond-> (:auth opts) (mock/header :authorization (str "Bearer " (or @token
+                                                                                              (auth0/get-test-token))))
                                   (:body opts) (mock/json-body (:body opts)))))]
      (update request :body #(m/decode "application/json" %)))))
 

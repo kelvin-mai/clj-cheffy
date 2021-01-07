@@ -3,6 +3,7 @@
    {org.clojure/clojure {:mvn/version "1.10.1"}
     integrant/repl {:mvn/version "0.3.2"}
     org.postgresql/postgresql {:mvn/version "42.2.18"}
+    aero/aero {:mvn/version "1.1.6"}
     clj-http/clj-http {:mvn/version "3.11.0"}
     integrant/integrant {:mvn/version "0.8.0"}
     ovotech/ring-jwt {:mvn/version "2.2.1"}

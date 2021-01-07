@@ -1,4 +1,6 @@
 {:server/jetty {:handler #ig/ref :cheffy/app
-                :port 3000}
+                :port #or [#env PORT 3000]}
  :cheffy/app {:jdbc-url #ig/ref :db/postgres}
- :db/postgres {:jdbc-url "jdbc:postgresql://localhost/cheffy_db?user=postgres&password=postgres"}}
+ :db/postgres {:jdbc-url #or [#env
+                              DATABASE_URL
+                              "jdbc:postgresql://localhost/cheffy_db?user=postgres&password=postgres"]}}

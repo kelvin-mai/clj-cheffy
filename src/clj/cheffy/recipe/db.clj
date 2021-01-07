@@ -36,3 +36,49 @@
   (-> (sql/delete! db :recipe recipe)
       :next.jdbc/update-count
       (pos?)))
+
+(defn favorite-recipe! [db {:keys [recipe-id] :as data}]
+  (->
+    (jdbc/with-transaction [tx db]
+      (sql/insert! tx :recipe-favorite data (:options db))
+      (jdbc/execute-one! tx ["UPDATE recipe 
+                            SET favorite_count = favorite_count + 1
+                            WHERE recipe_id = ?" recipe-id]))
+    :next.jdbc/update-count
+    (pos?)))
+
+(defn unfavorite-recipe! [db {:keys [recipe-id] :as data}]
+  (->
+    (jdbc/with-transaction [tx db]
+      (sql/delete! tx :recipe-favorite data (:options db))
+      (jdbc/execute-one! tx ["UPDATE recipe 
+                            SET favorite_count = favorite_count - 1
+                            WHERE recipe_id = ?" recipe-id]))
+    :next.jdbc/update-count
+    (pos?)))
+
+(defn insert-step! [db step]
+  (sql/insert! db :step step))
+
+(defn update-step! [db step]
+  (-> (sql/update! db :step step (select-keys step [:step-id]))
+      :next.jdbc/update-count
+      (pos?)))
+
+(defn delete-step! [db step]
+  (-> (sql/delete! db :step step)
+      :next.jdbc/update-count
+      (pos?)))
+
+(defn insert-ingredient! [db ingredient]
+  (sql/insert! db :ingredient ingredient))
+
+(defn update-ingredient! [db ingredient]
+  (-> (sql/update! db :ingredient ingredient (select-keys ingredient [:ingredient-id]))
+      :next.jdbc/update-count
+      (pos?)))
+
+(defn delete-ingredient! [db ingredient]
+  (-> (sql/delete! db :ingredient ingredient)
+      :next.jdbc/update-count
+      (pos?)))

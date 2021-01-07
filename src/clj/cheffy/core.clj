@@ -1,8 +1,13 @@
 (ns cheffy.core
-  (:require [cheffy.router :refer [routes]]
+  (:require [aero.core :as aero]
+            [cheffy.router :refer [routes]]
             [integrant.core :as ig]
             [next.jdbc :as jdbc]
             [ring.adapter.jetty :as jetty]))
+
+(defmethod aero/reader 'ig/ref
+  [_ _ value]
+  (ig/ref value))
 
 (defn app [env]
   (routes env))
@@ -27,9 +32,12 @@
   [_ jetty]
   (.stop jetty))
 
+(defn system-config [file]
+  (aero/read-config file))
+
 (defn -main
   [config-file]
-  (let [config (-> config-file
-                   slurp
-                   ig/read-string)]
-    (ig/init config)))
+  (-> config-file
+      (system-config)
+      (ig/init)))
+
