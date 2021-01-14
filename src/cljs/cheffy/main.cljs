@@ -1,4 +1,4 @@
-(ns browser.main)
+(ns cheffy.main)
 
 (println "Hello, world! - this is from the module static code - Open your Console in DevTools")
 

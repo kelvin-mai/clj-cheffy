@@ -6,3 +6,6 @@ target/
 .cpcache/
 .clj-kondo/
 .lsp/
+public/cljs-runtime/
+public/*.js
+public/manifest.edn
