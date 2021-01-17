@@ -1,7 +1,9 @@
-(ns cheffy.main)
+(ns cheffy.main
+  (:require [reagent.core :as r]
+            [reagent.dom :refer [render]]))
 
-(println "Hello, world! - this is from the module static code - Open your Console in DevTools")
+(defn app []
+  [:div "Cheffy"])
 
-(defn init []
-  (println "This is from the init function")
-  (.appendChild (.-body js/document) (.createTextNode js/document "It works!")))
+(defn ^:export ^:dev/after-load init []
+  (render [app] (.getElementById js/document "root")))
