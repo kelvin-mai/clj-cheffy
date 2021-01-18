@@ -29,3 +29,16 @@
                                   :data (str "recipe-id" recipe-id)
                                   :type :authorization-required})
                      (r/status 401))))))})
+
+(def wrap-manage-recipes
+  {:name ::manage-recipes
+   :description "Middleware to check if a user can manage recipes"
+   :wrap (fn [handler]
+           (fn [req]
+             (let [roles (get-in req [:claims "https://kelvin-cheffy.us.auth0.com/roles"])]
+               (if (some #{"manage-recipes"} roles)
+                 (handler req)
+                 (-> (r/response {:message "You need to be a cook to manage recipes"
+                                  :data (:uri req)
+                                  :type :authorization-required})
+                     (r/status 401))))))})
