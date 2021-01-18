@@ -1,5 +1,7 @@
 (ns cheffy.main
   (:require [cheffy.db]
+            [cheffy.nav.events]
+            [cheffy.nav.subs]
             [cheffy.nav.views :refer [nav]]
             [cheffy.theme :refer [theme]]
             [re-frame.core :as rf]
@@ -16,5 +18,9 @@
   (render [app] (.getElementById js/document "root")))
 
 (defn ^:export ^:dev/after-load init []
-  (js/console.log theme)
   (start))
+
+(comment
+  (js/console.log theme)
+  (js/console.log (:nav @re-frame.db/app-db))
+  (js/console.log re-frame.db/app-db))

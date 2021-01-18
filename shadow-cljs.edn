@@ -1,5 +1,6 @@
 {:source-paths ["src/cljs"]
- :dependencies [[binaryage/devtools "1.0.2"]
+ :dependencies [[cider/cider-nrepl "0.25.6"]
+                [binaryage/devtools "1.0.2"]
                 [reagent "1.0.0"]
                 [re-frame "1.1.2"]
                 [bidi "2.1.6"]
