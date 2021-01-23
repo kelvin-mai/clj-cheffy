@@ -1,17 +1,33 @@
 (ns cheffy.main
-  (:require [cheffy.db]
+  (:require [cheffy.auth.views :refer [profile sign-up login]]
+            [cheffy.db]
             [cheffy.nav.events]
             [cheffy.nav.subs]
             [cheffy.nav.views :refer [nav]]
             [cheffy.theme :refer [theme]]
             [re-frame.core :as rf]
-            [reagent.core :as r]
             [reagent.dom :refer [render]]
-            ["theme-ui" :refer [ThemeProvider]]))
+            ["theme-ui" :refer [ThemeProvider]]
+            ["rebass" :refer [Box]]))
+
+(defn pages [page-name]
+  (js/console.log "page-name" page-name)
+  (case page-name
+    :sign-up [sign-up]
+    :login [login]
+    :profile [profile]
+    :become-a-chef nil
+    :inbox nil
+    :recipes [profile]
+    :saved nil
+    [profile]))
 
 (defn app []
-  [:> ThemeProvider {:theme theme}
-   [nav]])
+  (let [active-nav @(rf/subscribe [:active-nav])]
+    [:> ThemeProvider {:theme theme}
+     [:> Box {:variant "container"}
+      [nav]
+      [pages active-nav]]]))
 
 (defn start []
   (rf/dispatch-sync [:initialize-db])

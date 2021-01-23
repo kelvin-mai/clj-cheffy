@@ -15,6 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@rebass/forms": "^4.0.6",
     "@rebass/preset": "^4.0.5",
     "highlight.js": "9.18.1",
     "react": "^17.0.1",

@@ -1,21 +1,42 @@
 (ns cheffy.nav.views
   (:require [re-frame.core :as rf]
-            ["rebass" :refer [Flex Box Link]]))
+            ["rebass" :refer [Flex Link]]))
 
-(def nav-items
+(def public-nav-items
+  [{:id :recipes
+    :text "Recipes"
+    :href "#recipes"}
+   {:id :become-a-chef
+    :text "Chef"
+    :href "#become-a-chef"}
+   {:id :sign-up
+    :text "Sign Up"
+    :href "#sign-up"}
+   {:id :login
+    :text "Login"
+    :href "#login"}])
+
+(def authenticated-nav-items
   [{:id :saved
     :text "Saved"
-    :href "#saved"
-    :dispatch #(rf/dispatch [:set-active-nav :saved])}
+    :href "#saved"}
+   {:id :inbox
+    :text "Inbox"
+    :href "#inbox"}
    {:id :recipes
     :text "Recipes"
-    :href "#recipes"
-    :dispatch #(rf/dispatch [:set-active-nav :recipes])}])
+    :href "#recipes"}
+   {:id :become-a-chef
+    :text "Chef"
+    :href "#become-a-chef"}
+   {:id :profile
+    :name "Profile"
+    :href "#profile"}])
 
 (defn nav-item
-  [{:keys [id href text dispatch active-nav]}]
+  [{:keys [id href text active-nav]}]
   [:> Link {:href href
-            :on-click dispatch
+            :on-click #(rf/dispatch [:set-active-nav id])
             :ml 2
             :pb 10
             :variant "nav"
@@ -23,15 +44,15 @@
                                   "2px solid #102A43")}}
    text])
 
-(defn authenticated []
+(defn nav-items [items]
   (let [active-nav @(rf/subscribe [:active-nav])]
     [:> Flex {:justify-content "flex-end"
               :py 1}
-     (for [item nav-items]
+     (for [item items]
        [nav-item (assoc item :active-nav active-nav :key (:id item))])]))
 
 (defn nav []
-  (let [user true]
+  (let [user false]
     (if user
-      [authenticated]
-      "public")))
+      [nav-items authenticated-nav-items]
+      [nav-items public-nav-items])))
