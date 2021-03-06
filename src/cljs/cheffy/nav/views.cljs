@@ -1,55 +1,46 @@
 (ns cheffy.nav.views
   (:require [re-frame.core :as rf]
+            [cheffy.router :as router]
             ["rebass" :refer [Flex Link]]))
 
 (def public-nav-items
   [{:id :recipes
-    :text "Recipes"
-    :href "#recipes"}
+    :text "Recipes"}
    {:id :become-a-chef
-    :text "Chef"
-    :href "#become-a-chef"}
+    :text "Chef"}
    {:id :sign-up
-    :text "Sign Up"
-    :href "#sign-up"}
+    :text "Sign Up"}
    {:id :login
-    :text "Login"
-    :href "#login"}])
+    :text "Login"}])
 
 (def authenticated-nav-items
   [{:id :saved
-    :text "Saved"
-    :href "#saved"}
-   {:id :inbox
-    :text "Inbox"
-    :href "#inbox"}
+    :text "Saved"}
+   {:id :inboxes
+    :text "Inbox"}
    {:id :recipes
-    :text "Recipes"
-    :href "#recipes"}
+    :text "Recipes"}
    {:id :become-a-chef
-    :text "Chef"
-    :href "#become-a-chef"}
+    :text "Chef"}
    {:id :profile
-    :name "Profile"
-    :href "#profile"}])
+    :name "Profile"}])
 
-(defn nav-item
-  [{:keys [id href text active-nav]}]
-  [:> Link {:href href
+(defn nav-item [{:keys [id text active-page]}]
+  [:> Link {:href (router/path-for id)
             :on-click #(rf/dispatch [:set-active-nav id])
             :ml 2
             :pb 10
             :variant "nav"
-            :sx {:border-bottom (when (= active-nav id)
+            :sx {:border-bottom (when (= active-page id)
                                   "2px solid #102A43")}}
    text])
 
 (defn nav-items [items]
-  (let [active-nav @(rf/subscribe [:active-nav])]
+  (let [active-page @(rf/subscribe [:active-page])]
     [:> Flex {:justify-content "flex-end"
               :py 1}
      (for [item items]
-       [nav-item (assoc item :active-nav active-nav :key (:id item))])]))
+       [nav-item (assoc item :active-page active-page :key (:id item))])]))
 
 (defn nav []
   (let [logged-in? @(rf/subscribe [:logged-in?])]

@@ -1,5 +1,6 @@
 (ns cheffy.auth.views
   (:require [cheffy.components :refer [page-nav form-group]]
+            [cheffy.router :as router]
             [re-frame.core :as rf]
             [reagent.core :as r]
             ["rebass" :refer [Flex Heading Box Button Link]]))
@@ -28,11 +29,9 @@
           "Personal Info"]
          [form-group {:id :first-name
                       :label "First name"
-                      :type "text"
                       :values values}]
          [form-group {:id :last-name
                       :label "Last name"
-                      :type "text"
                       :values values}]
          [:> Flex {:justify-content "flex-end"
                    :pt 2}
@@ -67,11 +66,9 @@
                 :m "auto"}
         [form-group {:id :first-name
                      :label "First name"
-                     :type "text"
                      :values values}]
         [form-group {:id :last-name
                      :label "Last name"
-                     :type "text"
                      :values values}]
         [form-group {:id :email
                      :label "Email"
@@ -84,8 +81,8 @@
         [:> Flex {:justify-content "space-between"
                   :py 2
                   :pr 2}
-         [:> Link {:href "#log-in"
-                   :on-click #(rf/dispatch [:set-active-nav :login])}
+         [:> Link {:href (router/path-for :log-in)
+                   :on-click #(rf/dispatch [:set-active-page :login])}
           "Login instead?"]
          [:> Button {:type "submit"
                      :on-click #(rf/dispatch [:sign-up @values])}
@@ -113,8 +110,8 @@
         [:> Flex {:justify-content "space-between"
                   :py 2
                   :pr 2}
-         [:> Link {:href "#sign-up"
-                   :on-click #(rf/dispatch [:set-active-nav :sign-up])}
+         [:> Link {:href (router/path-for :sign-up)
+                   :on-click #(rf/dispatch [:set-active-page :sign-up])}
           "Create an account"]
          [:> Button {:type "submit"
                      :on-click #(rf/dispatch [:login @values])}

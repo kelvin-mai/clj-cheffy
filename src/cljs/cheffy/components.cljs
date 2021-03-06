@@ -19,10 +19,12 @@
       right)]])
 
 (defn form-group [{:keys [id label type values]}]
-  [:> Box
-   [:> Label {:html-for id
-              :py 2} label]
-   [:> Input {:id id
-              :type type
-              :value (id @values)
-              :on-change #(swap! values assoc id (.. % -target -value))}]])
+  (let [value (or (id @values) "")
+        type (or type "text")]
+    [:> Box
+     [:> Label {:html-for id
+                :py 2} label]
+     [:> Input {:id id
+                :type type
+                :value value
+                :on-change #(swap! values assoc id (.. % -target -value))}]]))

@@ -1,5 +1,6 @@
 (ns cheffy.main
-  (:require [cheffy.auth.events]
+  (:require [cheffy.router :as router]
+            [cheffy.auth.events]
             [cheffy.auth.subs]
             [cheffy.auth.views :refer [profile sign-up login]]
             [cheffy.db]
@@ -25,13 +26,14 @@
     [profile]))
 
 (defn app []
-  (let [active-nav @(rf/subscribe [:active-nav])]
+  (let [active-page @(rf/subscribe [:active-page])]
     [:> ThemeProvider {:theme theme}
      [:> Box {:variant "container"}
       [nav]
-      [pages active-nav]]]))
+      [pages active-page]]]))
 
 (defn start []
+  (router/start!)
   (rf/dispatch-sync [:initialize-db])
   (render [app] (.getElementById js/document "root")))
 
