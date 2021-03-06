@@ -1,5 +1,7 @@
 (ns cheffy.main
-  (:require [cheffy.auth.views :refer [profile sign-up login]]
+  (:require [cheffy.auth.events]
+            [cheffy.auth.subs]
+            [cheffy.auth.views :refer [profile sign-up login]]
             [cheffy.db]
             [cheffy.nav.events]
             [cheffy.nav.subs]

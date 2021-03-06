@@ -1,8 +1,7 @@
 (ns cheffy.nav.subs
-  (:require [re-frame.core :refer [reg-sub]]))
+  (:require [re-frame.core :as rf]))
 
-(reg-sub
+(rf/reg-sub
   :active-nav
   (fn [db _]
     (get-in db [:nav :active-nav])))
-

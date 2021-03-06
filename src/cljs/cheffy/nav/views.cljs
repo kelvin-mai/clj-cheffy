@@ -52,7 +52,7 @@
        [nav-item (assoc item :active-nav active-nav :key (:id item))])]))
 
 (defn nav []
-  (let [user false]
-    (if user
+  (let [logged-in? @(rf/subscribe [:logged-in?])]
+    (if logged-in?
       [nav-items authenticated-nav-items]
       [nav-items public-nav-items])))
